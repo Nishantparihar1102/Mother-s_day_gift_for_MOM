@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dear Mom ❤️ — A Love Letter in Code</title>
+  <meta name="description" content="A cinematic, emotional tribute to the most important person in the world — Mom." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       LOADING SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="loader" class="loader">
+    <div class="loader__scanlines"></div>
+    <div class="loader__grid"></div>
+    <div class="loader__content">
+      <div class="loader__logo">❤</div>
+      <div class="loader__terminal">
+        <span class="loader__cursor">›</span>
+        <span id="loader-typed"></span>
+        <span class="loader__blink">_</span>
+      </div>
+      <div class="loader__bar-wrap">
+        <div class="loader__bar">
+          <div class="loader__bar-fill" id="loader-bar"></div>
+        </div>
+        <span class="loader__percent" id="loader-percent">0%</span>
+      </div>
+    </div>
+    <div class="loader__corner loader__corner--tl"></div>
+    <div class="loader__corner loader__corner--tr"></div>
+    <div class="loader__corner loader__corner--bl"></div>
+    <div class="loader__corner loader__corner--br"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MUSIC CONTROL
+  ═══════════════════════════════════════════ -->
+  <button id="music-btn" class="music-btn" title="Toggle Music" aria-label="Toggle background music">
+    <span class="music-btn__icon" id="music-icon">♪</span>
+    <span class="music-btn__label">Music</span>
+  </button>
+
+  <!-- Hidden audio element — place your mp3 in assets/music/piano.mp3 -->
+  <audio id="bg-music" loop>
+    <source src="assets/music/piano.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ═══════════════════════════════════════════
+       PARTICLES CANVAS
+  ═══════════════════════════════════════════ -->
+  <div id="particles-js"></div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════ -->
+  <main id="main" class="main hidden">
+
+    <!-- ── HERO ─────────────────────────────── -->
+    <section class="section hero" id="hero">
+      <div class="hero__bg-glow"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal-up">A Message From The Heart</p>
+
+        <div class="hero__frame-wrap reveal-scale">
+          <div class="hero__frame">
+            <!-- Replace src with your photo -->
+            <img
+              src="assets/images/mom.jpg"
+              alt="My Wonderful Mom"
+              class="hero__photo"
+              onerror="this.outerHTML='<div class=\'hero__photo-placeholder\'><span>📷</span><small>Place mom.jpg<br>in assets/images/</small></div>'"
+            />
+            <div class="hero__frame-glow"></div>
+            <div class="hero__frame-corner hero__frame-corner--tl"></div>
+            <div class="hero__frame-corner hero__frame-corner--tr"></div>
+            <div class="hero__frame-corner hero__frame-corner--bl"></div>
+            <div class="hero__frame-corner hero__frame-corner--br"></div>
+          </div>
+        </div>
+
+        <h1 class="hero__name reveal-up">Mom</h1>
+        <p class="hero__quote reveal-up">
+          "The first person who loved me<br/>before I even existed."
+        </p>
+
+        <a href="#poem" class="hero__scroll-hint reveal-up">
+          <span class="hero__scroll-arrow">↓</span>
+          <span>Read My Story</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── POEM ──────────────────────────────── -->
+    <section class="section poem-section" id="poem">
+      <div class="poem-section__noise"></div>
+      <div class="poem-section__inner">
+        <p class="section-label reveal-up">— Written with love —</p>
+        <h2 class="poem-section__title reveal-up">A Poem for You</h2>
+        <div class="poem-section__lines" id="poem-lines">
+          <div class="poem-line" data-delay="0">When I was weak,</div>
+          <div class="poem-line poem-line--italic" data-delay="1">you made me strong.</div>
+          <div class="poem-line poem-spacer"></div>
+          <div class="poem-line" data-delay="2">When I was lost,</div>
+          <div class="poem-line poem-line--italic" data-delay="3">you showed me the way.</div>
+          <div class="poem-line poem-spacer"></div>
+          <div class="poem-line" data-delay="4">When the world felt cold,</div>
+          <div class="poem-line poem-line--italic" data-delay="5">your arms were my home.</div>
+          <div class="poem-line poem-spacer"></div>
+          <div class="poem-line" data-delay="6">No matter how tall I grow,</div>
+          <div class="poem-line poem-line--italic poem-line--glow" data-delay="7">I will always be your child.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TIMELINE / MEMORIES ──────────────── -->
+    <section class="section timeline-section" id="memories">
+      <div class="timeline-section__inner">
+        <p class="section-label reveal-up">— Through the years —</p>
+        <h2 class="timeline-section__title reveal-up">Our Memories</h2>
+
+        <div class="timeline">
+
+          <div class="timeline__item timeline__item--left memory-card">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__img-wrap">
+                <img src="assets/images/memory1.jpg" alt="Childhood" class="timeline__img"
+                  onerror="this.parentElement.innerHTML='<div class=\'timeline__img-placeholder\'><span>🍼</span></div>'" />
+              </div>
+              <div class="timeline__body">
+                <span class="timeline__year">The Beginning</span>
+                <h3 class="timeline__heading">First Days</h3>
+                <p class="timeline__caption">Before I could speak, you already knew every cry, every smile, every need. You were fluent in a language only a mother learns.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline__item timeline__item--right memory-card">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__img-wrap">
+                <img src="assets/images/memory2.jpg" alt="School Days" class="timeline__img"
+                  onerror="this.parentElement.innerHTML='<div class=\'timeline__img-placeholder\'><span>🎒</span></div>'" />
+              </div>
+              <div class="timeline__body">
+                <span class="timeline__year">School Days</span>
+                <h3 class="timeline__heading">Every Morning</h3>
+                <p class="timeline__caption">You packed my lunch, tied my shoes, and sent me off with a hug that carried me through every difficult day.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline__item timeline__item--left memory-card">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__img-wrap">
+                <img src="assets/images/memory3.jpg" alt="Growing Up" class="timeline__img"
+                  onerror="this.parentElement.innerHTML='<div class=\'timeline__img-placeholder\'><span>🌻</span></div>'" />
+              </div>
+              <div class="timeline__body">
+                <span class="timeline__year">Growing Up</span>
+                <h3 class="timeline__heading">Late Night Talks</h3>
+                <p class="timeline__caption">Those quiet evenings where you listened — not to fix, but just to understand. Those conversations shaped who I am.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline__item timeline__item--right memory-card">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <div class="timeline__img-wrap">
+                <img src="assets/images/memory4.jpg" alt="Family Moments" class="timeline__img"
+                  onerror="this.parentElement.innerHTML='<div class=\'timeline__img-placeholder\'><span>🏡</span></div>'" />
+              </div>
+              <div class="timeline__body">
+                <span class="timeline__year">Always & Forever</span>
+                <h3 class="timeline__heading">Family</h3>
+                <p class="timeline__caption">The home you built wasn't made of walls and roofs — it was made of laughter, warmth, and an unconditional love that never ran out.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LETTER ─────────────────────────────── -->
+    <section class="section letter-section" id="letter">
+      <div class="letter-section__inner">
+        <p class="section-label reveal-up">— From the deepest part of me —</p>
+        <h2 class="letter-section__title reveal-up">An Open Letter</h2>
+        <p class="letter-section__sub reveal-up">I've never been good with words out loud. So I wrote this instead.</p>
+
+        <div class="letter-btn-wrap reveal-up">
+          <button class="letter-btn" id="letter-btn">
+            <span class="letter-btn__heart">❤️</span>
+            <span>Open My Heart</span>
+          </button>
+        </div>
+
+        <div class="letter-envelope" id="letter-envelope">
+          <div class="letter-paper" id="letter-paper">
+            <div class="letter-paper__header">
+              <span class="letter-paper__date">Mother's Day, 2025</span>
+              <div class="letter-paper__line"></div>
+            </div>
+            <p class="letter-paper__salutation">Dear Mom,</p>
+            <div class="letter-paper__body" id="letter-body">
+              <p>There are things I've wanted to say for years, but every time I tried, the words felt too small for the feeling. So let me try one more time.</p>
+              <p>Thank you — not just for the meals you cooked or the clothes you washed or the nights you stayed up when I was sick. Thank you for the invisible things. The way you believed in me before I believed in myself. The way you never made me feel like a burden, even when I was one.</p>
+              <p>I've watched you carry so much, so quietly. And it made me understand what real strength looks like. Not loud. Not dramatic. Just steady, warm, and endlessly patient.</p>
+              <p>I know I don't say it enough. I know I sometimes forget to call. I know I've taken your presence for granted in ways I'm only now starting to understand. But know this — every version of me that is good, is good because of you.</p>
+              <p>You are my home. My first friend. My loudest cheerleader. My safest place.</p>
+              <p>Happy Mother's Day, Mom. Today and every day.</p>
+            </div>
+            <p class="letter-paper__sign">With all my love,<br/><em>Your Child ❤️</em></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SLIDESHOW ──────────────────────────── -->
+    <section class="section slideshow-section" id="gallery">
+      <div class="slideshow-section__inner">
+        <p class="section-label reveal-up">— Frozen in time —</p>
+        <h2 class="slideshow-section__title reveal-up">Moments I Treasure</h2>
+
+        <div class="slideshow reveal-up">
+          <div class="slideshow__track" id="slideshow-track">
+            <!-- Slides generated by JS -->
+          </div>
+          <button class="slideshow__btn slideshow__btn--prev" id="slide-prev" aria-label="Previous">‹</button>
+          <button class="slideshow__btn slideshow__btn--next" id="slide-next" aria-label="Next">›</button>
+          <div class="slideshow__dots" id="slideshow-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ENDING ─────────────────────────────── -->
+    <section class="section ending-section" id="ending">
+      <div class="ending-section__bg-glow"></div>
+      <div class="ending-section__content">
+        <div class="ending-section__hearts" id="ending-hearts"></div>
+        <p class="ending-section__small reveal-up">— with every heartbeat —</p>
+        <h1 class="ending-section__headline reveal-up">Thank You, Mom</h1>
+        <p class="ending-section__sub reveal-up">❤️</p>
+        <h2 class="ending-section__wish reveal-up">Happy Mother's Day</h2>
+        <p class="ending-section__tagline reveal-up">
+          Built with code. Filled with love.<br/>
+          <span class="ending-section__credit">Made by your child — for you.</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
